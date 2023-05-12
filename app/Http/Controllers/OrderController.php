@@ -149,8 +149,7 @@ class OrderController extends Controller
                 ], 404);
             }
 
-            $stock = $product->stock;
-            if ($stock < 1) {
+            if ($product->stock < 1) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Product out of stock'
@@ -166,7 +165,7 @@ class OrderController extends Controller
             }
 
             // update product stock
-            $product->stock = $stock - 1;
+            $product->stock -= 1;
             $product->save();
 
             DB::commit();

@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'serverKey' => env('MIDTRANDS_SERVER_KEY'),
+    'serverKey' => env('MIDTRANS_SERVER_KEY'),
 ];
