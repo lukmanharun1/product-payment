@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "902fa19f-fed6-4087-8457-9f37bd4764eb",
+		"name": "product payment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23186276"
+	},
+	"item": [
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST_API}}products",
+							"host": [
+								"{{HOST_API}}products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST_API}}products/:id",
+							"host": [
+								"{{HOST_API}}products"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST_API}}products/:id",
+							"host": [
+								"{{HOST_API}}products"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"product\",\r\n    \"description\": \"description description\",\r\n    \"price\": 100000,\r\n    \"stock\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST_API}}products",
+							"host": [
+								"{{HOST_API}}products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"product\",\r\n    \"description\": \"description description\",\r\n    \"price\": 100000,\r\n    \"stock\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST_API}}products/:id",
+							"host": [
+								"{{HOST_API}}products"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_id\": \"4\",\r\n    \"payment\": \"BCA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST_API}}order",
+							"host": [
+								"{{HOST_API}}order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "midtrands callback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"va_numbers\":[{\"va_number\":\"69353915025\",\"bank\":\"bca\"}],\"transaction_time\":\"2023-05-12 12:01:59\",\"transaction_status\":\"pending\",\"transaction_id\":\"718e201a-9412-479b-a59f-51d156f40587\",\"status_message\":\"midtrans payment notification\",\"status_code\":\"201\",\"signature_key\":\"55cf8d2a08880297812b29e5386b17cb81bc78bc2c73451e14fe8532ee86459ac69d36301c4400d4ea17e48c7e39edbdbb9b53522b4a07b282b4ac84fe01aff5\",\"payment_type\":\"bank_transfer\",\"payment_amounts\":[],\"order_id\":\"326aa067-aebc-4d76-88e8-6d98f7fdfdd7\",\"merchant_id\":\"G505569353\",\"gross_amount\":\"111000.00\",\"fraud_status\":\"accept\",\"expiry_time\":\"2023-05-13 12:01:59\",\"currency\":\"IDR\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST_API}}midtrans/callback",
+							"host": [
+								"{{HOST_API}}midtrans"
+							],
+							"path": [
+								"callback"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "http://localhost:8000/",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMSIsIm5hbWUiOiJMdWttYW4gSGFydW4iLCJlbWFpbCI6Imx1a21hbkBnbWFpbC5jb20ifQ.ubQbaMpPZSrLrLA7VMnufOYueWbLXZcVcm3kUHqgAyE",
+			"type": "string"
+		},
+		{
+			"key": "HOST_API",
+			"value": "http://localhost:8000/api/",
+			"type": "string"
+		}
+	]
+}
